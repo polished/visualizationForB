@@ -1,0 +1,16 @@
+.controls{
+    position:relative;
+    top:0;
+}
+
+.plot{
+    width:33%;
+    min-height:350px;
+    margin:10px 0;
+    background:white;
+    float:left;
+}
+
+.histogram .bin{
+    fill:rgb(180,180,180);
+}
