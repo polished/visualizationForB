@@ -36,6 +36,7 @@ function parse(d){
     //if(+d.duration<0) return;
 
     return {
+        //time: parseDate(d.HEADER_TIME_STAMP),
         time: new Date(d.HEADER_TIME_STAMP),
         DomAnk_X_mPers2: +d.DomAnk_X_mPers2,
         DomAnk_Y_mPers2	: +d.DomAnk_Y_mPers2,
@@ -69,11 +70,11 @@ draw(rows);
 }
 
 function draw(data) {
-    console.log(data);
-    console.log(data[1].time);
-    console.log(d3.extent(data, function (d) {
-        return d.time;
-    }));
+    //console.log(data);
+    //console.log(data[1].time);
+    //console.log(d3.extent(data, function (d) {
+    //    return d.time;
+    //}));
     //maxim = d3.max();
     var scaleX = d3.time.scale().domain(d3.extent(data, function (d) {
             return d.time;
@@ -116,14 +117,18 @@ function draw(data) {
         .interpolate('basis');
 
     var lines = plot.selectAll('.lines')
-        .data(data);
+        .datum(data);
+        //.data(data, function(d) {
+            //return d;});
 
-    //var lines_enter = lines.enter().append('path').attr('class', 'line').attr('d', lineGenerator);
+    //var lines_enter = lines.enter().append('path').attr('class', 'line').attr('d', lineGenerator(data));
     //var lines_exit = lines.exit().remove();
 
     plot.append('path')
         .attr('class', 'line')
-        .attr('d', lineGenerator(data));
+        .attr('d', lineGenerator(data))
+        .attr('stroke', "black")
+        .attr('stroke-width', '1');
 
     //
     //// axes ToDo axisY and append both
